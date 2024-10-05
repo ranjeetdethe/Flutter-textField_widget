@@ -24,18 +24,74 @@ class _MainAppState extends State<MainApp>{
       home: Scaffold(
         appBar: AppBar(
           title: const Text(
-            "Aspect Ratio Demo",
+            "Text Field Demo",
             style: TextStyle(fontSize: 30,fontWeight: FontWeight.w500),
 
           ),
         ),
-        body: Center(
-          child: Container(
-            height: 300,
-            width: 300,
-            color: Colors.amber,
-            child: Image.network("https://static-cse.canva.com/blob/1625993/ComposeStunningImages6.jpg"),
-          ),
+        body: Column(
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(padding:const EdgeInsets.all(20.0),
+              child: TextField(
+                controller: namecontroller,
+                style: const TextStyle(
+                  fontSize: 30,
+                ),
+                obscureText: true,
+                decoration: const InputDecoration(
+                  suffixIcon: Icon(Icons.visibility),
+                  hintText: "Enter Name",
+                  hintStyle: TextStyle(fontSize: 25,color: Colors.grey,
+                  ),
+                  border: OutlineInputBorder(),
+                ),
+                onChanged: (String val){
+                  print("value: $val");
+                },
+                onEditingComplete: (){
+                  print("Editing completed");
+                },
+                onSubmitted: (value) {
+                  print("Value Submitted: $value");
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            GestureDetector(
+              onTap: (){
+                print("Add Data");
+                myName = namecontroller.text;
+                print("My Name: $myName");
+                namecontroller.clear();
+                setState(() { });
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 15,
+                  vertical: 5,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: const Text("Add Data",style:TextStyle(fontSize: 25, color: Colors.white,
+                ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            Text("Name: $myName",
+            style: const TextStyle(
+              fontSize: 20,
+            ),)
+          ],
         ),
       ),
     );
